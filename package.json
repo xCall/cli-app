@@ -1,0 +1,23 @@
+{
+  "name": "@jsassertivo/cli",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "jsassertivo": "cli.js"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "user:generate": "node commands/generate-user.js",
+    "db:create": "node commands/create-database.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.8",
+    "babel-jest": "^27.5.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "faker": "^6.6.6",
+    "jest": "^27.5.1"
+  }
+}
