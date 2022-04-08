@@ -18,7 +18,9 @@
     "@babel/core": "^7.17.8",
     "babel-jest": "^27.5.1",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
-    "faker": "^6.6.6",
     "jest": "^27.5.1"
+  },
+  "dependencies": {
+    "faker": "^5.5.3"
   }
 }

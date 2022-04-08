@@ -20,7 +20,7 @@ describe('Logger', () => {
   
   it('Deve executar console.log ao chamar a função sucess', () => {
     logger.success('test');
-    expect(spyLog).toHaveBeenCalledTimes(0);
+    expect(spyLog).toHaveBeenCalledTimes(1);
   });
 
   it('Deve executar console.error ao chamar a função log error', () => {
