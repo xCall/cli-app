@@ -1,5 +1,4 @@
 import { createUser } from '../../../src/database/user/create';
-import path from '../../../src/database/path';
 import ROLES from '../../../src/constants/roles';
 import * as file from '../../../src/database/file';
 
@@ -23,7 +22,6 @@ const usuario = {
   user: 'usuario',
   lastName: 'qualquer',
 };
-
 
 it('Cria um usuário corretamente', async () => {
 
