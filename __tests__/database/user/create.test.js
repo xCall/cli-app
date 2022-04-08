@@ -1,6 +1,6 @@
 import { createUser } from '../../../src/database/user/create';
 import path from '../../../src/database/path';
-
+import ROLES from '../../../src/constants/roles';
 import * as file from '../../../src/database/file';
 
 jest.mock('../../../src/database/file.js');
@@ -24,4 +24,10 @@ const user = await createUser(usuario);
 
 expect(file.loadDatabase).toHaveBeenCalledTimes(1);
 expect(file.saveDatabase).toHaveBeenCalledTimes(1);
+expect(file.saveDatabase).toHaveBeenCalledWith([user]);
+expect(user).toEqual({
+  ...usuario, 
+  uid: expect.any(String),
+  role: ROLES.USER,
+});
 });
