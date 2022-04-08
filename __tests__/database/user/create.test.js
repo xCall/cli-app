@@ -3,6 +3,16 @@ import path from '../../../src/database/path';
 import ROLES from '../../../src/constants/roles';
 import * as file from '../../../src/database/file';
 
+beforeEach(() => {
+  file.loadDatabase.mockResolvedValueOnce([]);
+});
+afterEach(() => {
+  jest.clearAllMocks();
+});
+afterAll(() => {
+  jest.restoreAllMocks();
+});
+
 jest.mock('../../../src/database/file.js');
 jest.mock('../../../src/database/path.js');
 
@@ -14,20 +24,33 @@ const usuario = {
   lastName: 'qualquer',
 };
 
+
 it('Cria um usuário corretamente', async () => {
 
-// as duas funções fazem a mesma coisa
-//file.loadDatabase.mockImplementation(() => Promise.resolve([]));
-file.loadDatabase.mockResolvedValueOnce([]);
+  const user = await createUser(usuario);
 
-const user = await createUser(usuario);
-
-expect(file.loadDatabase).toHaveBeenCalledTimes(1);
-expect(file.saveDatabase).toHaveBeenCalledTimes(1);
-expect(file.saveDatabase).toHaveBeenCalledWith([user]);
-expect(user).toEqual({
-  ...usuario, 
-  uid: expect.any(String),
-  role: ROLES.USER,
+  expect(file.loadDatabase).toHaveBeenCalledTimes(1);
+  expect(file.saveDatabase).toHaveBeenCalledTimes(1);
+  expect(file.saveDatabase).toHaveBeenCalledWith([user]);
+  expect(user).toEqual({
+    ...usuario,
+    uid: expect.any(String),
+    role: ROLES.USER,
+  });
 });
+
+it('Cria usuário com role ADMIN', async () => {
+  const user = await createUser({
+    ...usuario,
+    role: ROLES.ADMIN,
+  });
+  expect(file.loadDatabase).toHaveBeenCalledTimes(1);
+  expect(file.saveDatabase).toHaveBeenCalledTimes(1);
+  expect(file.saveDatabase).toHaveBeenCalledWith([user]);
+  expect(user).toEqual({
+    ...usuario,
+    uid: expect.any(String),
+    role: ROLES.ADMIN,
+  });
+
 });
