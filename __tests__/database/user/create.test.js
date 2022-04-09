@@ -24,7 +24,7 @@ const usuario = {
 };
 
 it('Cria um usuário corretamente', async () => {
-
+  expect.assertions(4);
   const user = await createUser(usuario);
 
   expect(file.loadDatabase).toHaveBeenCalledTimes(1);
@@ -38,6 +38,7 @@ it('Cria um usuário corretamente', async () => {
 });
 
 it('Cria usuário com role ADMIN', async () => {
+  expect.assertions(4);
   const user = await createUser({
     ...usuario,
     role: ROLES.ADMIN,
