@@ -9,11 +9,11 @@ export const getUserByUid = async (uid) => {
   return user;
 }
 
-export const getUserByUsernameAndPassword = (username, password) => {
+export const getUserByUsernameAndPassword = async (username, password) => {
   const data = await loadDatabase();
   const user = data.find(usr => usr.userName === username && usr.password === password);
 
-  if(!usr) {
+  if(!user) {
     throw new Error('Credenciais incorretas ou usuário inexistente.');
   }
 

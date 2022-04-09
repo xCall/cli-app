@@ -1,30 +1,31 @@
 import logger from 'utils/logger';
 
+const spies = {
+  log: jest.spyOn(console, 'log').mockImplementation(),
+  error: jest.spyOn(console, 'error').mockImplementation()
+};
+
 describe('Logger', () => {
-  const spyLog = jest.spyOn(console, 'log').mockImplementation((args) => {
-    console.info('mockImplementation');
-    console.info(...args);
-  });
   beforeEach(() => {
-    spyLog.mockClear();
+    jest.clearAllMocks();
   });
+
   afterAll(() => {
     jest.restoreAllMocks();
   });
 
   it('Deve executar console.log ao chamar a função log', () => {
-    logger.log('test');
-  
-    expect(spyLog).toHaveBeenCalledTimes(1);
-  });
-  
-  it('Deve executar console.log ao chamar a função sucess', () => {
-    logger.success('test');
-    expect(spyLog).toHaveBeenCalledTimes(1);
+    logger.log('teste');
+    expect(spies.log).toHaveBeenCalledTimes(1);
   });
 
-  it('Deve executar console.error ao chamar a função log error', () => {
-    logger.error('test');
-    expect(spyLog).toHaveBeenCalledTimes(1);
-  })
-})
+  it('Deve executar console.log ao chamar a função success', () => {
+    logger.success('teste');
+    expect(spies.log).toHaveBeenCalledTimes(1);
+  });
+
+  it('Deve executar console.error ao chamar a função log', () => {
+    logger.error('teste');
+    expect(spies.error).toHaveBeenCalledTimes(1);
+  });
+});
